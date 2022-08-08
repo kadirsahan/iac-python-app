@@ -23,10 +23,10 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t gnmn:$IMAGE_TAG .
-      - docker tag gnmn:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
+      - docker build -t gnmn:11 .
+      - docker tag gnmn:11 $REPOSITORY_URI:11
   post_build:
     commands:
       - echo Build completed on `date`
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:11
       - echo Writing definitions file...
