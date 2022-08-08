@@ -12,6 +12,8 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - echo $AWS_DEFAULT_REGION
+      - IMAGE_REPO_NAME=gnmn
+      - echo $IMAGE_REPO_NAME
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 921975613299.dkr.ecr.us-east-1.amazonaws.com
       - REPOSITORY_URI=921975613299.dkr.ecr.us-east-1.amazonaws.com/gnmn
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
@@ -21,8 +23,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t gnmn .
-      - docker tag gnmn:IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
+      - docker build -t gnmn:$IMAGE_TAG .
+      - docker tag gnmn:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
